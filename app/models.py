@@ -8,6 +8,7 @@ class ModelCache(Base):
     __tablename__ = "model_cache"
 
     model_id = Column(String, primary_key=True)
+    canonical_slug = Column(String, nullable=False, index=True)
     is_free = Column(Boolean, nullable=False)
     input_price = Column(Float, nullable=False)
     output_price = Column(Float, nullable=False)
