@@ -19,6 +19,7 @@ def sync_models():
             
             existing = db.get(ModelCache, model["id"])
             if existing:
+                existing.canonical_slug = model["canonical_slug"]
                 existing.is_free = is_free
                 existing.input_price = input_price
                 existing.output_price = output_price
@@ -26,6 +27,7 @@ def sync_models():
                 db.add(
                     ModelCache(
                         model_id=model["id"],
+                        canonical_slug=model["canonical_slug"],
                         is_free=is_free,
                         input_price=input_price,
                         output_price=output_price,
