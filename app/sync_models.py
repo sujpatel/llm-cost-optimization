@@ -12,7 +12,8 @@ def sync_models():
     
     db = SessionLocal()
     try:
-        for model in models:
+        text_models = [m for m in models if m["architecture"]["output_modalities"] == ["text"]]
+        for model in text_models:
             input_price = float(model["pricing"]["prompt"])
             output_price = float(model["pricing"]["completion"])
             is_free = input_price == 0 and output_price == 0
@@ -34,7 +35,7 @@ def sync_models():
                     )
                 )
         db.commit()
-        print(f"Synced {len(models)} models.")
+        print(f"Synced {len(text_models)} text models (out of {len(models)} total).")
     finally:
         db.close()
 
